@@ -68,7 +68,6 @@ jobs:
           --parameter-overrides \
               BucketName=buildersmanual-website-prod \
               DomainName=www.buildersmanual.dev \
-              RootDomainName=buildersmanual.dev \
               ACMCertificateArn=arn:aws:acm:us-east-1:730335453734:certificate/88110793-07f7-4a1e-8bcb-4a798e0b796f \
           --no-fail-on-empty-changeset
 
