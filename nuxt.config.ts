@@ -10,14 +10,14 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'SaaS Builders Manual — Marketing Crash Course for Software Builders',
-      htmlAttrs: { lang: 'de' },
+      htmlAttrs: { lang: 'en' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
           content:
-            'SaaS Builders Manual: Der Marketing Crash Kurs für Software Builder. Von Market Type über GTM und Funnel bis zu Channels — die Mechanik hinter SaaS Growth.',
+            'SaaS Builders Manual: The marketing crash course for software builders. From market type to GTM, funnels and channels — the mechanics behind SaaS growth.',
         },
       ],
       link: [
