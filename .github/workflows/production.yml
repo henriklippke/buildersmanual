@@ -48,6 +48,17 @@ jobs:
           sudo /tmp/aws/install --update
           rm -rf /tmp/aws/
 
+      # A failed first deploy leaves the stack in ROLLBACK_COMPLETE, which blocks updates
+      - name: Delete stack if stuck in ROLLBACK_COMPLETE
+        run: |
+          STATUS=$(aws cloudformation describe-stacks \
+            --stack-name buildersmanual-website-prod \
+            --query "Stacks[0].StackStatus" --output text 2>/dev/null || echo "NO_STACK")
+          if [ "$STATUS" = "ROLLBACK_COMPLETE" ]; then
+            aws cloudformation delete-stack --stack-name buildersmanual-website-prod
+            aws cloudformation wait stack-delete-complete --stack-name buildersmanual-website-prod
+          fi
+
       # Run Cloudformation
       - name: Run cfn
         run: |
@@ -60,6 +71,14 @@ jobs:
               RootDomainName=buildersmanual.dev \
               ACMCertificateArn=arn:aws:acm:us-east-1:730335453734:certificate/88110793-07f7-4a1e-8bcb-4a798e0b796f \
           --no-fail-on-empty-changeset
+
+      - name: Show stack events on failure
+        if: failure()
+        run: |
+          aws cloudformation describe-stack-events \
+            --stack-name buildersmanual-website-prod \
+            --query "StackEvents[?contains(ResourceStatus,'FAILED')].[LogicalResourceId,ResourceStatusReason]" \
+            --output table
 
       # Upload fingerprinted assets FIRST so chunks exist before any HTML references them.
       # No --delete: old /_nuxt/ chunks stay available for in-flight old HTML (prevents mismatch).
