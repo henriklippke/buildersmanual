@@ -102,3 +102,12 @@ jobs:
             --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistribution'].OutputValue" \
             --output text)
           aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
+
+      # DNS is managed externally: the www CNAME must point at this domain
+      - name: Show CloudFront domain
+        run: |
+          DOMAIN=$(aws cloudformation describe-stacks \
+            --stack-name buildersmanual-website-prod \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDomainName'].OutputValue" \
+            --output text)
+          echo "CloudFront domain: $DOMAIN" | tee -a "$GITHUB_STEP_SUMMARY"
