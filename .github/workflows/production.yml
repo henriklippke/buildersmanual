@@ -1,0 +1,86 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-production:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '24.x'
+
+      # NPM Install
+      - name: Install NPM dependencies
+        run: npm install
+
+      # Generate Static Site
+      - name: Run build
+        run: |
+          NUXT_PUBLIC_STAGE=production NUXT_PUBLIC_SITE_URL=https://www.buildersmanual.dev npm run generate
+
+      # Setup AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN_PROD }}
+          aws-region: eu-central-1
+          role-session-name: GitHubActions-Prod-Deploy
+
+      - name: Install AWS CLI v2
+        run:  |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
+          unzip -q /tmp/awscliv2.zip -d /tmp
+          rm /tmp/awscliv2.zip
+          sudo /tmp/aws/install --update
+          rm -rf /tmp/aws/
+
+      # Run Cloudformation
+      - name: Run cfn
+        run: |
+          aws cloudformation deploy \
+          --stack-name buildersmanual-website-prod \
+          --template-file cloudformation.yml \
+          --parameter-overrides \
+              BucketName=buildersmanual-website-prod \
+              DomainName=www.buildersmanual.dev \
+              RootDomainName=buildersmanual.dev \
+              ACMCertificateArn=arn:aws:acm:us-east-1:730335453734:certificate/88110793-07f7-4a1e-8bcb-4a798e0b796f \
+          --no-fail-on-empty-changeset
+
+      # Upload fingerprinted assets FIRST so chunks exist before any HTML references them.
+      # No --delete: old /_nuxt/ chunks stay available for in-flight old HTML (prevents mismatch).
+      - name: Deploy hashed assets to S3 (immutable)
+        run: |
+          aws s3 sync ./.output/public/ s3://buildersmanual-website-prod/ \
+            --exclude "*" --include "_nuxt/*" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      # Upload HTML and payloads LAST with no-cache so browsers/CloudFront always revalidate them.
+      - name: Deploy HTML and payloads to S3 (always revalidate)
+        run: |
+          aws s3 sync ./.output/public/ s3://buildersmanual-website-prod/ \
+            --exclude "_nuxt/*" \
+            --cache-control "no-cache"
+
+      # Invalidate CloudFront so the new HTML is served immediately (distribution id from CFN output).
+      - name: Invalidate CloudFront
+        run: |
+          DIST_ID=$(aws cloudformation describe-stacks \
+            --stack-name buildersmanual-website-prod \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistribution'].OutputValue" \
+            --output text)
+          aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
