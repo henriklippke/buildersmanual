@@ -94,6 +94,11 @@ jobs:
             --exclude "_nuxt/*" \
             --cache-control "no-cache"
 
+      # Sync runs without --delete, so files removed from the repo must be removed here explicitly.
+      - name: Remove retired files from S3
+        run: |
+          aws s3 rm s3://buildersmanual-website-prod/loopthink-linkedin-funnel.pdf
+
       # Invalidate CloudFront so the new HTML is served immediately (distribution id from CFN output).
       - name: Invalidate CloudFront
         run: |
