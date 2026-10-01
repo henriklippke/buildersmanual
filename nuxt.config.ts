@@ -7,6 +7,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', '/sitemap.xml'],
+    },
+  },
   app: {
     head: {
       title: 'SaaS Builders Manual — Marketing Crash Course for Software Builders',
