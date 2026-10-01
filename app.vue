@@ -727,6 +727,9 @@ const backToMotion = () => {
     }
   })
 }
+const scrollToCoaching = () => {
+  document.getElementById('coaching')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 const progressPct = computed(() => `${(lesson.value / lessonSteps.length) * 100}%`)
 watch(lesson, () => {
   if (typeof window !== 'undefined') window.scrollTo(0, 0)
@@ -889,6 +892,13 @@ onBeforeUnmount(() => {
             ↺ Reset
           </button>
         </div>
+        <button
+          type="button"
+          class="shrink-0 rounded-lg border border-brand/60 px-3 py-1.5 font-mono text-xs font-semibold text-brand transition hover:bg-brand hover:text-ink"
+          @click="scrollToCoaching"
+        >
+          Coaching
+        </button>
       </div>
       <div v-if="lesson >= 1" class="h-0.5 w-full bg-line/50">
         <div
@@ -918,13 +928,20 @@ onBeforeUnmount(() => {
             </p>
           </div>
 
-          <div class="mt-9">
+          <div class="mt-9 flex flex-wrap gap-3">
             <button
               type="button"
               class="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-mono text-sm font-semibold text-ink transition hover:bg-brand-soft"
               @click="started = true; goLesson(1)"
             >
               Start the course <span>→</span>
+            </button>
+            <button
+              type="button"
+              class="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3 font-mono text-sm font-semibold text-fg-muted transition hover:border-fg-faint hover:text-fg"
+              @click="scrollToCoaching"
+            >
+              Book coaching
             </button>
           </div>
         </div>
@@ -1999,6 +2016,9 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </main>
+
+    <!-- ====================== Coaching (every screen) ====================== -->
+    <CoachingForms id="coaching" class="scroll-mt-16" :motion="selected" />
 
     <footer class="border-t border-line/60">
       <div
