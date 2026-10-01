@@ -83,6 +83,18 @@ const scrollToCoaching = () => {
           <div class="mt-6 space-y-4 text-lg leading-relaxed text-fg-muted">
             <p v-for="p in a.intro" :key="p">{{ p }}</p>
           </div>
+          <a
+            v-if="a.book"
+            :href="a.book.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center gap-3 rounded-lg border border-line bg-surface px-4 py-3 text-sm transition hover:border-fg-faint"
+          >
+            <span class="font-mono text-xs text-fg-faint">The book</span>
+            <span class="font-medium">{{ a.book.title }}</span>
+            <span class="text-fg-faint">· {{ a.book.author }}</span>
+            <span class="text-brand-soft">&#8599;</span>
+          </a>
 
           <section v-for="s in a.sections" :key="s.h2" class="mt-12">
             <h2 class="text-xl font-bold tracking-tight md:text-2xl">{{ s.h2 }}</h2>

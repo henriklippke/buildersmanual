@@ -637,24 +637,28 @@ const books = [
     author: 'Rob Walling',
     note: 'The classic for bootstrapped, niche-first launches. Distribution over funding.',
     url: 'https://www.amazon.de/Start-Small-Stay-Developers-Launching-ebook/dp/B003YH9MMI',
+    notes: '/articles/start-small-stay-small-book-summary/',
   },
   {
     title: 'The Right It',
     author: 'Alberto Savoia',
     note: 'Pretotyping from the person who coined it. Fake the product and test the demand before you build. Lesson 6 in book form.',
     url: 'https://www.amazon.de/Right-Many-Ideas-Yours-Succeed/dp/0062884662/',
+    notes: '/articles/the-right-it-book-summary/',
   },
   {
     title: 'The SaaS Playbook',
     author: 'Rob Walling',
     note: 'The operator manual for a bootstrapped SaaS, from the first users up to scale.',
     url: 'https://www.amazon.de/SaaS-Playbook-Multimillion-Dollar-Startup-Without-ebook/dp/B0CCQB26RS',
+    notes: '/articles/the-saas-playbook-book-summary/',
   },
   {
     title: 'Jobs to Be Done: Theory to Practice',
     author: 'Anthony W. Ulwick',
     note: 'The deep dive behind lesson 2, why people hire a product and how to find the job.',
     url: 'https://www.amazon.de/Jobs-Done-Theory-Practice-English-ebook/dp/B0CH1DWMQZ',
+    notes: '/articles/jobs-to-be-done-book-summary/',
   },
 ]
 
@@ -1987,7 +1991,10 @@ onMounted(() => {
                 <span class="text-fg-faint">· {{ b.author }}</span>
                 <span class="text-brand-soft">&#8599;</span>
               </a>
-              <p class="mt-0.5 text-xs text-fg-faint">{{ b.note }}</p>
+              <p class="mt-0.5 text-xs text-fg-faint">
+                {{ b.note }}
+                <NuxtLink :to="b.notes" class="ml-1 text-brand-soft transition hover:text-brand">Our notes →</NuxtLink>
+              </p>
             </li>
           </ul>
         </div>

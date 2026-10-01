@@ -28,6 +28,8 @@ export interface Article {
   cta: { label: string; href: string }
   /* one or two lines above the coaching button */
   coaching: string
+  /* book notes link out to the book */
+  book?: { title: string; author: string; url: string }
 }
 
 export const articles: Article[] = [
@@ -535,6 +537,263 @@ export const articles: Article[] = [
     cta: { label: 'Start the course', href: '/#motions' },
     coaching:
       'Building right now and no idea how you get the first customers? Thats exactly what the coaching is for. Better we talk now than after six months of building.',
+  },
+  {
+    slug: 'start-small-stay-small-book-summary',
+    title: 'Start Small, Stay Small by Rob Walling: Summary and Lessons',
+    h1: 'Start Small, Stay Small: the book for developers who want to launch',
+    description:
+      'Notes on Start Small, Stay Small by Rob Walling: why bootstrapped founders should pick a niche, find the market before the product and test demand before writing code.',
+    kicker: 'Book notes · Bootstrapping',
+    accent: 'var(--color-brand)',
+    minutes: 5,
+    intro: [
+      'Start Small, Stay Small from Rob Walling came out in 2010, and it is still one of the books I recommend the most to developers who want to launch something on their own. It is written exactly for that person: you can build, you have no funding, and you dont want to raise any.',
+      'The book is old, some tactics are a bit outdated. But the core idea is more relevant than ever, and it is the same idea the whole course is build on: distribution before product.',
+    ],
+    sections: [
+      {
+        h2: 'What the book is about',
+        paras: [
+          'Walling calls his reader a "micropreneur". Someone who builds a small, self-funded software business, often alone, often next to a job. The goal is not the next unicorn. The goal is a product that pays the bills and gives you freedom.',
+          'And for that you need a very different playbook than the startup world tells you. No big vision deck, no growth at all costs. Small niche, real demand, cheap marketing.',
+        ],
+      },
+      {
+        h2: 'The key ideas',
+        bullets: [
+          'Market first, product second. Most developers start with the product idea and look for buyers later. Walling says turn it around, find a market with a real problem and people who already spend money, then build for them.',
+          'Pick a niche. A small market that the big players ignore is not a weakness, for a solo founder its the advantage. Less competition, easier to reach, easier to be the best.',
+          'Test the demand before you build. Landing page, a few keywords, see if anybody shows interest. Months of coding for a product nobody wants is the most expensive mistake there is.',
+          'Marketing is part of the product. If you can not say how you reach your customers, you dont have a business yet, you have a hobby project.',
+        ],
+      },
+      {
+        h2: 'How it connects to the course',
+        paras: [
+          'The opening of the course says it pretty direct: the default playbook is build for months, then go find "someone for marketing". Start Small, Stay Small is basically the long version of why this does not work.',
+          'Also the idea to pick your channel on day one, and to validate before you code, comes straight from this way of thinking. If you liked lesson 6 (smoke test, prototype, concierge), you will like this book.',
+        ],
+      },
+      {
+        h2: 'Who should read it',
+        paras: [
+          'Developers who want to build a small, bootstrapped SaaS and have not launched anything yet. If you already have paying customers and want to scale, the SaaS Playbook from the same author is the better next step.',
+        ],
+      },
+    ],
+    takeaways: [
+      'Find the market and the demand first, then build the product.',
+      'A small niche is an advantage for a solo founder, not a problem.',
+      'Validate before you write code.',
+      'Distribution is part of the product from the first day.',
+    ],
+    cta: { label: 'Start the course', href: '/#motions' },
+    coaching:
+      'Reading about niches is easy, picking your own is hard. In a 1:1 we look at your idea and check if the market and the channel are really there.',
+    book: {
+      title: 'Start Small, Stay Small',
+      author: 'Rob Walling',
+      url: 'https://www.amazon.de/Start-Small-Stay-Developers-Launching-ebook/dp/B003YH9MMI',
+    },
+  },
+
+  {
+    slug: 'the-right-it-book-summary',
+    title: 'The Right It by Alberto Savoia: Summary of Pretotyping',
+    h1: 'The Right It: test the idea before you build it',
+    description:
+      'Notes on The Right It by Alberto Savoia: why most new products fail, what pretotyping is, the XYZ hypothesis and how to collect your own data before writing code.',
+    kicker: 'Book notes · Validation',
+    accent: 'var(--color-brand)',
+    minutes: 6,
+    intro: [
+      'Alberto Savoia was an early engineering director at Google and later their "innovation agitator". In The Right It (2019) he wrote down what he taught there for years: most new ideas fail, and you should find out if yours is one of them before you build it, not after.',
+      'In the course I say this is lesson 6 in book form. And thats really what it is.',
+    ],
+    sections: [
+      {
+        h2: 'The Law of Failure',
+        paras: [
+          'The book starts with a quite brutal observation. Most new products fail, even when they are executed well. Not because the team was bad, but because it was the wrong idea. Savoia calls the right idea "The Right It".',
+          'His main point: make sure you are building The Right It before you build it right. Most teams do it the other way around, they polish something for months that nobody wanted from the begining.',
+        ],
+      },
+      {
+        h2: 'Pretotyping instead of prototyping',
+        paras: [
+          'A prototype asks "can we build it?". A pretotype asks "should we build it at all?". You fake the product, or a part of it, and see if people actually use it or pay for it.',
+          'Savoia describes a whole set of techniques for this. A few of them:',
+        ],
+        bullets: [
+          'Mechanical Turk, a human does secretly what the software would do later.',
+          'Fake Door, a button or a landing page for a product that does not exist yet. You count who clicks.',
+          'Pinocchio, a non-working model you use as if it was real, to see if you would actually use it.',
+          'One-Night Stand, you offer the service once, for a short time, before you invest in the real thing.',
+        ],
+      },
+      {
+        h2: 'Your own data, not other peoples data',
+        paras: [
+          'A big part of the book is about data. Market reports, studies, what worked for some other company, all of that is other peoples data. It tells you very little about your idea.',
+          'What counts is your own data. Real reactions from real people to your pretotype. And best is data where people have skin in the game, so they give you money, time or at least their email address, not just a "sounds nice".',
+        ],
+      },
+      {
+        h2: 'The XYZ hypothesis',
+        paras: [
+          'To make an idea testable, Savoia turns it into a sentence: "At least X% of Y will Z." For example: at least 10% of the club treasurers we reach will sign up for the payment reminder in the first week.',
+          'With that you have a clear number, a clear target group and a clear action. And after the test you can not tell yourself a nice story anymore, the number was reached or not.',
+        ],
+      },
+      {
+        h2: 'How it connects to the course',
+        paras: [
+          'Lesson 6 of the course is exactly this. Smoke test, prototype, concierge, and the motion-specific tests like the Reddit thread, the tiny Google Ads test or asking for a letter of intent. All of these are pretotypes. And the rule "test fast, kill fast, no drama" is pure Savoia.',
+        ],
+      },
+    ],
+    takeaways: [
+      'Most new products fail because the idea is wrong, not the execution.',
+      'Pretotype first: fake it and measure real behaviour.',
+      'Trust your own data, best with skin in the game.',
+      'Write your idea as "At least X% of Y will Z" and test it.',
+    ],
+    cta: { label: 'Start the course', href: '/#motions' },
+    coaching:
+      'Not sure how to pretotype your idea? Lets design the cheapest possible test for your product together in a 1:1.',
+    book: {
+      title: 'The Right It',
+      author: 'Alberto Savoia',
+      url: 'https://www.amazon.de/Right-Many-Ideas-Yours-Succeed/dp/0062884662/',
+    },
+  },
+
+  {
+    slug: 'the-saas-playbook-book-summary',
+    title: 'The SaaS Playbook by Rob Walling: Summary and Key Lessons',
+    h1: 'The SaaS Playbook: building a SaaS without venture capital',
+    description:
+      'Notes on The SaaS Playbook by Rob Walling: the operator manual for bootstrapped SaaS founders, from the first customers to a profitable, multimillion-dollar business without VC.',
+    kicker: 'Book notes · SaaS',
+    accent: 'var(--color-brand)',
+    minutes: 5,
+    intro: [
+      'The SaaS Playbook is the second book from Rob Walling on this list. It came out in 2023, more than ten years after Start Small, Stay Small. In between he founded and sold the email tool Drip, started the MicroConf conference and the TinySeed accelerator. So this book comes from a lot of real experience.',
+      'If Start Small, Stay Small is about getting started, the SaaS Playbook is about what comes after: you have a product, you have first customers, how do you build a real business out of it, without venture capital?',
+    ],
+    sections: [
+      {
+        h2: 'What the book is about',
+        paras: [
+          'Walling describes a path between "solo side project" and "VC-funded startup". Bootstrapped or with very little funding, profitable, and still big enough to be life-changing. He shows that you dont need to raise millions to build a SaaS that makes millions.',
+          'The book is very practical. Less theory, more "this is what I see work again and again with the founders I work with".',
+        ],
+      },
+      {
+        h2: 'The key ideas',
+        bullets: [
+          'The founder matters. Your skills, your risk tolerance and your goals decide which kind of SaaS makes sense for you, not the other way around.',
+          'Market before product, again. A good market with a so-so product beats a great product in a bad market.',
+          'Marketing is not one thing. You need to find the few channels that work for your product and go deep on them, instead of trying everything a little bit.',
+          'Know your numbers. MRR, churn, customer acquisition cost and lifetime value tell you if the business works, long before your gut does.',
+          'Mindset is a big part. Walling is very honest about the stress, the doubts and the long phases where nothing seems to move.',
+        ],
+      },
+      {
+        h2: 'How it connects to the course',
+        paras: [
+          'Lessons 4 and 5 of the course are about exactly the questions Walling asks: which motion fits your market, which channels belong to it, what price can carry it, and can you as a founder actually run it. The reality check in lesson 5 ("are you a seller?") is the same honest look at the founder that runs through the whole book.',
+          'Also the idea that the price comes out of the motion, and that a sales-led SaaS needs a few thousand per account to pay for a rep, fits very good to how Walling thinks about SaaS economics.',
+        ],
+      },
+      {
+        h2: 'Who should read it',
+        paras: [
+          'Founders who have a SaaS with first paying customers, or who are very close to it, and who want to grow it without giving away the company. If you are still at the idea stage, start with Start Small, Stay Small and The Right It first.',
+        ],
+      },
+    ],
+    takeaways: [
+      'You can build a big SaaS business without venture capital.',
+      'The founder, the market and the channels matter more than features.',
+      'Go deep on a few channels that fit, instead of trying all.',
+      'Know your metrics: MRR, churn, CAC and LTV.',
+    ],
+    cta: { label: 'Check your motion in the course', href: '/#strategy' },
+    coaching:
+      'Got first customers and not sure what to do next? In a 1:1 or in the cohort we look at your channels, your price and your next steps.',
+    book: {
+      title: 'The SaaS Playbook',
+      author: 'Rob Walling',
+      url: 'https://www.amazon.de/SaaS-Playbook-Multimillion-Dollar-Startup-Without-ebook/dp/B0CCQB26RS',
+    },
+  },
+
+  {
+    slug: 'jobs-to-be-done-book-summary',
+    title: 'Jobs to Be Done: Theory to Practice by Anthony Ulwick: Summary',
+    h1: 'Jobs to Be Done: why people hire your product',
+    description:
+      'Notes on Jobs to Be Done: Theory to Practice by Anthony Ulwick: the job as the unit of analysis, job maps, desired outcomes and how to find underserved needs for your SaaS.',
+    kicker: 'Book notes · Jobs to Be Done',
+    accent: 'var(--color-brand)',
+    minutes: 6,
+    intro: [
+      'Lesson 2 of the course starts with one sentence: nobody wants your product, they hire it to get a job done. That is Jobs to Be Done in one line. And Anthony Ulwick is one of the people who turned this idea into a real method.',
+      'His book Jobs to Be Done: Theory to Practice (2016) is the deep dive behind that lesson. Its not the easiest read, but it changes how you look at products.',
+    ],
+    sections: [
+      {
+        h2: 'The job is the unit of analysis',
+        paras: [
+          'The core idea: dont look at the customer (age, company size, persona) and dont look at your product. Look at the job the customer is trying to get done. The job is stable over time, the solutions change.',
+          'People did not want a CD, a MP3 player or Spotify. They wanted to listen to music. The job stayed the same, only the product they hired for it changed. If you understand the job, you understand where the next product will come from.',
+          'The milkshake story we use in the course is from Clayton Christensen, who made the idea famous. Ulwick worked on JTBD long before and made it systematic, with his method called Outcome-Driven Innovation.',
+        ],
+      },
+      {
+        h2: 'The job map',
+        paras: [
+          'Ulwick breaks every job down into steps, the job map. Roughly: define what you need, locate the inputs, prepare, confirm you are ready, execute, monitor, modify if something goes wrong, and conclude.',
+          'Why is this useful? Because at every step there is something that can be faster, more reliable or less annoying. And that is where products win.',
+        ],
+      },
+      {
+        h2: 'Desired outcomes',
+        paras: [
+          'For each step, customers have desired outcomes. Ulwick writes them in a fixed format, a direction plus a metric plus the object, like "minimize the time it takes to collect open payments".',
+          'Then you ask customers how important each outcome is and how satisfied they are with their current solution. Outcomes that are very important but badly served today are your opportunities. Outcomes that are already well served are not worth to compete on.',
+        ],
+      },
+      {
+        h2: 'How it connects to the course',
+        paras: [
+          'Lesson 2 uses a light version of this. When does it show up? What are they trying to get done? So they can what? What do they hire today instead? These four questions are the job, the outcome and the current solution, in a form you can fill in five minutes.',
+          'And lesson 3, how bad is the pain, is basically the question how underserved the job is. A blocking pain is an important outcome that is very badly served. That is why it points to PLG: people search for a fix on their own.',
+        ],
+      },
+      {
+        h2: 'Who should read it',
+        paras: [
+          'Everyone who builds a product and is not 100% sure what problem they really solve. Its more of a method book than a story book, so take your time with it. If you do the exercises with real customers, it pays back many times.',
+        ],
+      },
+    ],
+    takeaways: [
+      'People hire products to get a job done. The job is stable, solutions change.',
+      'Break the job into steps with a job map.',
+      'Find outcomes that are important but badly served today.',
+      'Lesson 2 and 3 of the course are a light version of this method.',
+    ],
+    cta: { label: 'Define your job in lesson 2', href: '/#the-job' },
+    coaching:
+      'Struggling to put your job into one honest sentence? Thats where most ideas are still weak. Lets work it out together in a 1:1.',
+    book: {
+      title: 'Jobs to Be Done: Theory to Practice',
+      author: 'Anthony W. Ulwick',
+      url: 'https://www.amazon.de/Jobs-Done-Theory-Practice-English-ebook/dp/B0CH1DWMQZ',
+    },
   },
 ]
 
